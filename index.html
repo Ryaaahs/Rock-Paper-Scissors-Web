@@ -7,9 +7,15 @@
         <script>
             //Create a function called computerPlay that will randomly return 
             //Rock, Paper or Scissors 
+            let computerScore = 0; 
+            let playerScore = 0; 
+            let totalTie = 0; 
+            let totalRounds = 0; 
+
+            game(); 
 
             function computerPlay(){
-                let gameArray = ["Rock", "Paper", "Scissors"]
+                let gameArray = ["rock", "paper", "scissors"]
                 let randomVal = Math.floor(Math.random() * gameArray.length); 
                 return gameArray[randomVal]; 
             }
@@ -22,26 +28,83 @@
                 // Compare all winner situations for both the player and computer 
 
                 if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "paper"){
-                    return "You Lose! Paper beats Rock"
+                    computerScore++; 
+                    return "You Lose! Paper beats Rock";
                 }else if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "scissors"){
-                    return "You Win! Rock beats Scissors"
+                    playerScore++; 
+                    return "You Win! Rock beats Scissors";
                 }else if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "rock"){
-                    return "It's a Tie! Rock cannot beat Rock"
+                    totalTie++;
+                    return "It's a Tie! Rock cannot beat Rock";
                 }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "rock"){
-                    return "You Win! Paper beats Rock"
-                }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "sissors"){
-                    return "You Lose! Scissors beats Paper"
+                    playerScore++; 
+                    return "You Win! Paper beats Rock";
+                }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "scissors"){
+                    computerScore++; 
+                    return "You Lose! Scissors beats Paper";
                 }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "paper"){
-                    return "It's a Tie! Paper cannot beat Paper"
+                    totalTie++; 
+                    return "It's a Tie! Paper cannot beat Paper";
                 }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "paper"){
-                    return "You Win! Scissors beats Paper"
+                    playerScore++; 
+                    return "You Win! Scissors beats Paper";
                 }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "rock"){
-                    return "You Lose! Rock beats Scissors"
+                    computerScore++; 
+                    return "You Lose! Rock beats Scissors";
                 }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "scissors"){
-                    return "It's a Tie! Scissors cannot beat Scissors" 
-                }else{
-                    // If the user inputs something other than the game componet. 
-                    return "You need to either input rock, paper, or scissors."
+                    totalTie++; 
+                    return "It's a Tie! Scissors cannot beat Scissors"; 
+                }
+            }
+
+            //Display the total score of the player and the computer
+            function displayScore(){
+                return console.log("Current score is: \nPlayer Score: " + playerScore + "\nComputer Score: " + computerScore + "\nTies: " + totalTie); 
+            }
+
+            //Create a new function call game(), use playRound to play 5 round game that keeps 
+            //score and reports a winner and loser at the end 
+
+            function game(){
+                let playingGame = true;
+                let playerChoice = "";  
+                let computerChoice = ""; 
+                while(playingGame){
+                    
+                    totalRounds++; 
+                    //End game once round five finishes
+                    if(totalRounds > 5){
+                        playingGame = false; 
+                        if(playerScore > computerScore){
+                            console.log("--------------------------\nCongrats, Player win and Computer lost!");
+                            displayScore(); 
+                        }else if(computerScore > playerScore){
+                            console.log("--------------------------\nComputer win, you lost! Try again");
+                            displayScore(); 
+                        }else{
+                            //Tie condition for player and computer
+                            console.log("--------------------------\nYou Tied! Try again");
+                            displayScore();  
+                        }
+                    }else{
+                        console.log("--------------------------\nCurrent Round: " + totalRounds); 
+                        //get player input 
+                        playerChoice = prompt("Please choose either rock, paper or scissors.");
+
+                        //check if the player picked either rock paper or scissors
+                        while(playerChoice.toLowerCase() != "rock" && playerChoice.toLowerCase() != "paper" && playerChoice.toLowerCase() != "scissors"){
+                            console.log("You need to either input rock, paper, or scissors.");
+                            playerChoice = prompt("Please choose either rock, paper or scissors.");
+                        }
+
+                        //play a single round 
+                        computerChoice = computerPlay(); 
+                        console.log("Player Choice: " + playerChoice + "\nComputer Choice: " + computerChoice); 
+                        console.log(playRound(playerChoice, computerChoice)); 
+                        displayScore(); 
+                    }
+
+                    
                 }
             }
         </script>
