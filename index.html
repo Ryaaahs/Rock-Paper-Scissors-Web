@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <main>
+
+    </main>
+    <body>
+        <script>
+            //Create a function called computerPlay that will randomly return 
+            //Rock, Paper or Scissors 
+
+            function computerPlay(){
+                let gameArray = ["Rock", "Paper", "Scissors"]
+                let randomVal = Math.floor(Math.random() * gameArray.length); 
+                return gameArray[randomVal]; 
+            }
+
+            //Plays one round of rock paper scissors 
+            //Function takes in two params: playerSelection and computerSelection 
+            //function should return a string that declares the winner 
+
+            function playRound(playerSelection, computerSelection){
+                // Compare all winner situations for both the player and computer 
+
+                if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "paper"){
+                    return "You Lose! Paper beats Rock"
+                }else if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "scissors"){
+                    return "You Win! Rock beats Scissors"
+                }else if(playerSelection.toLowerCase() == "rock" && computerSelection.toLowerCase() == "rock"){
+                    return "It's a Tie! Rock cannot beat Rock"
+                }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "rock"){
+                    return "You Win! Paper beats Rock"
+                }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "sissors"){
+                    return "You Lose! Scissors beats Paper"
+                }else if(playerSelection.toLowerCase() == "paper" && computerSelection.toLowerCase() == "paper"){
+                    return "It's a Tie! Paper cannot beat Paper"
+                }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "paper"){
+                    return "You Win! Scissors beats Paper"
+                }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "rock"){
+                    return "You Lose! Rock beats Scissors"
+                }else if(playerSelection.toLowerCase() == "scissors" && computerSelection.toLowerCase() == "scissors"){
+                    return "It's a Tie! Scissors cannot beat Scissors" 
+                }else{
+                    // If the user inputs something other than the game componet. 
+                    return "You need to either input rock, paper, or scissors."
+                }
+            }
+        </script>
+    </body>
+</html>
